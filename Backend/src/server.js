@@ -1,0 +1,44 @@
+import './config/env.js';
+import express from 'express';
+import app from './app.js';
+import './config/db.js';
+import connectDB from './config/db.js';
+import cors from 'cors';
+import productApi from './modules/product/product.routes.js';
+import productView from './modules/product/product.routes.js';
+import productDeleteRouter from "./modules/product/product.routes.js";
+import userApi from './modules/signup/signup.routes.js';
+import cartRouter from './modules/cart/cart.routes.js';
+import dns from 'dns';
+dns.setServers(['1.1.1.1', '8.8.8.8']);
+
+
+app.use(express.json());
+app.use(cors());
+
+
+
+
+let PORT=process.env.PORT;
+connectDB();
+
+//product routes
+app.use("/api/createProduct", productApi);
+app.use("/api/getProduct", productView);
+app.use("/api/deleteProduct", productDeleteRouter);
+
+//signup routes
+app.use("/api/signup", userApi);
+
+//signin routes
+app.use("/api/signin", userApi);
+
+//cart routes
+app.use("/api", cartRouter);
+
+
+
+
+app.listen(PORT,()=>{
+    console.log(`Server is running on port ${PORT}`);
+})
