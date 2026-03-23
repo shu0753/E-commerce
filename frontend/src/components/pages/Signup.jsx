@@ -24,8 +24,21 @@ function Signup({ setMode }) {
   async function submitRegister(e) {
     e.preventDefault();
 
+    // ✅ validation
+    if (
+      !signupData.email ||
+      !signupData.firstname ||
+      !signupData.lastname ||
+      !signupData.phone ||
+      !signupData.password ||
+      !signupData.confirmPassword
+    ) {
+      alert("All fields are required!");
+      return;
+    }
+
     if (signupData.password !== signupData.confirmPassword) {
-      alert('Passwords do not match');
+      alert("Passwords do not match");
       return;
     }
 
@@ -35,15 +48,23 @@ function Signup({ setMode }) {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify(signupData)
+        body: JSON.stringify({
+          email: signupData.email,
+          firstName: signupData.firstname,  // ✅ match backend
+          lastName: signupData.lastname,    // ✅ match backend
+          phoneNO: signupData.phone,        // ✅ match backend
+          password: signupData.password,
+          confirmPassword: signupData.confirmPassword
+        })
       });
 
       const data = await res.json();
-      console.log(data);
+      console.log("Register Response:", data);
 
       if (data.success) {
-        alert("Registration Successful");
+        alert("Registration Successful ✅");
 
+        // reset form
         setSignupData({
           email: "",
           firstname: "",
@@ -52,19 +73,18 @@ function Signup({ setMode }) {
           password: "",
           confirmPassword: ""
         });
+
         if (setMode) {
-          setMode('signin');
+          setMode("signin");
         }
       } else {
         alert(data.message || "Registration Failed");
       }
 
     } catch (error) {
-      console.error('Error during registration:', error);
+      console.error("Register Error:", error);
       alert("Registration Failed!");
     }
-
-    console.log('Register', signupData);
   }
 
   return (

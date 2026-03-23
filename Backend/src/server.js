@@ -9,8 +9,7 @@ import productView from './modules/product/product.routes.js';
 import productDeleteRouter from "./modules/product/product.routes.js";
 import userApi from './modules/signup/signup.routes.js';
 import cartRouter from './modules/cart/cart.routes.js';
-import dns from 'dns';
-dns.setServers(['1.1.1.1', '8.8.8.8']);
+
 
 
 app.use(express.json());
@@ -21,6 +20,7 @@ app.use(cors());
 
 let PORT=process.env.PORT;
 connectDB();
+
 
 //product routes
 app.use("/api/createProduct", productApi);
@@ -34,7 +34,9 @@ app.use("/api/signup", userApi);
 app.use("/api/signin", userApi);
 
 //cart routes
+app.use("/api/addToCart", cartRouter);
 app.use("/api", cartRouter);
+
 
 
 

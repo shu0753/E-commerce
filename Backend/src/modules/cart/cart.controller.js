@@ -1,4 +1,4 @@
-import { addToCartServices,getCartServices,removeCartProduct} from "./cart.services.js";
+import { addToCartServices, getCartServices,removeCartProdcutServices } from "./cart.services.js";
 
 export const addToCart=async(req,res)=>{
     console.log("req.body",req.body);
@@ -10,33 +10,32 @@ export const addToCart=async(req,res)=>{
         res.status(500).json({
             message:error
         })
+
     }
 }
 
-export const getCart = async (req, res) => {
-    try {
-        const { userId } = req.body;
 
-        const cart = await getCartServices(userId);
-
+export const getCart=async(req,res)=>{
+    try{
+        const{userId}=req.body;
+        const cart= await getCartServices(userId);
+        console.log("cart",cart);
         res.status(200).json(cart);
     } catch (error) {
         res.status(500).json({
-            message: error.message
+            message:error
         });
     }
-};
+}
 
-export const removeCart = async (req, res) => {
+export const removeCartProduct=async(req,res)=>{
     try {
-        const { userId, productId } = req.body;
-
-        const cart = await removeCartProduct(userId, productId);
-
+        const {userId,productId}=req.body;
+        const cart= await removeCartProdcutServices(userId,productId);
         res.status(200).json(cart);
     } catch (error) {
         res.status(500).json({
-            message: error.message
+            message:error
         });
-    }
-};
+    }   
+}

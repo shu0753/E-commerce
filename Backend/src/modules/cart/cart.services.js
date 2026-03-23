@@ -35,15 +35,18 @@ export const addToCartServices=async(userId,productId)=>{
     return await cart.save();
 }
 
+
 export const getCartServices=async(userId)=>{
-    const cart= await Cart.findOne({userId}).populate("items.productId");
-    return cart;
+    console.log("userId",userId);
+   const data=await Cart.findOne({userId}).populate("items.productId");
+   return data;
 }
 
-export const removeCartProduct=async(userId,productId)=>{
+export const removeCartProdcutServices=async(userId,productId)=>{
     const cart= await Cart.findOne({userId});
-    if(cart){
-        cart.items=cart.items.filter((product)=>(product.productId.toString() !== productId));
-        return await cart.save();
-    }
+
+   cart.items=cart.items.filter((product)=>(
+        product.productId.toString() != productId
+    ))
+    return await cart.save();
 }
