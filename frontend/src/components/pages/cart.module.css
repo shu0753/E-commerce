@@ -1,0 +1,241 @@
+.container {
+  font-family: "Segoe UI", sans-serif;
+  min-height: 100vh;
+  padding: 20px;
+  position: relative;
+  overflow-x: hidden; 
+  
+  background: 
+    linear-gradient(to bottom, rgba(255,248,240,0.9), rgba(255,238,221,0.9)),
+    url('https://images.unsplash.com/photo-1616496457365-37a0f5ec22a6?auto=format&fit=crop&w=1470&q=80') center/cover no-repeat;
+
+  background-attachment: fixed;
+}
+
+/* FLOATING ICONS */
+.container::after,
+.container::before {
+  position: absolute;
+  pointer-events: none;
+}
+
+.container::after {
+  content: '🪔🌸🕉️';
+  font-size: 3rem;
+  top: -50px;
+  left: 20%;
+  animation: float 10s infinite linear;
+  opacity: 0.15;
+}
+
+.container::before {
+  content: '🌺🪔🌸';
+  font-size: 2.5rem;
+  top: -60px;
+  left: 60%;
+  animation: float 12s infinite linear;
+  opacity: 0.1;
+}
+
+/* FLOAT ANIMATION (smoother) */
+@keyframes float {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(20px) rotate(10deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+/* HEADING */
+.title {
+  font-size: 2.5rem;
+  text-align: center;
+  color: #b85c38;
+  text-shadow: 0 0 5px #f6e2d3, 0 0 10px #f6d6b0;
+  margin-bottom: 30px;
+  animation: glow 2.5s infinite alternate;
+  font-family: 'Merriweather', serif;
+}
+
+/* GLOW */
+@keyframes glow {
+  0% { text-shadow: 0 0 5px #f6e2d3, 0 0 10px #f6d6b0; }
+  50% { text-shadow: 0 0 15px #ffb84d, 0 0 25px #ff9900; }
+  100% { text-shadow: 0 0 5px #f6e2d3, 0 0 10px #f6d6b0; }
+}
+
+/* LAYOUT */
+.wrapper {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* LEFT */
+.left {
+  flex: 2;
+}
+
+/* RIGHT */
+.right {
+  flex: 1;
+  background: #fff3e6;
+  border-radius: 12px;
+  padding: 20px;
+  height: fit-content;
+  box-shadow: 0 8px 20px rgba(184, 92, 56, 0.2);
+}
+
+.right h2 {
+  margin-bottom: 15px;
+  color: #6a3f2a;
+}
+
+/* CARD */
+.card {
+  display: flex;
+  align-items: center;
+  background: #fff6f0;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  padding: 12px;
+  box-shadow: 0 4px 12px rgba(184, 92, 56, 0.15);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 12px 25px rgba(184, 92, 56, 0.25);
+}
+
+/* IMAGE */
+.image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-right: 12px;
+}
+
+/* DETAILS */
+.details h3 {
+  margin: 0;
+  color: #6a3f2a;
+}
+
+.price {
+  color: #b85c38;
+  font-weight: bold;
+}
+
+/* QUANTITY */
+.qty {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 5px;
+}
+
+.qty button {
+  padding: 4px 10px;
+  border: none;
+  border-radius: 6px;
+  background-color: #b85c38;
+  color: #fff7f0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.qty button:hover {
+  box-shadow: 0 0 12px #ffb84d;
+  transform: scale(1.1);
+}
+
+/* DELETE */
+.delete {
+  margin-left: auto;
+  border: none;
+  background: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: #c97c2d;
+  transition: all 0.3s ease;
+}
+
+.delete:hover {
+  transform: rotate(20deg) scale(1.2);
+  color: red;
+}
+
+/* SUMMARY */
+.row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-top: 15px;
+  border-top: 1px solid #f4d8c2;
+  padding-top: 10px;
+}
+
+/* BUTTON */
+.checkout {
+  width: 100%;
+  padding: 12px;
+  background-color: #b85c38;
+  color: #fff7f0;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  margin-top: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.checkout:hover {
+  background-color: #943f1f;
+  box-shadow: 0 0 20px #ffb84d;
+  transform: scale(1.03);
+}
+
+/* STATES */
+.loading,
+.empty {
+  text-align: center;
+  color: #b85c38;
+  margin-top: 20px;
+  font-size: 1.2rem;
+}
+@media (max-width: 768px) {
+  .wrapper {
+    flex-direction: column;
+  }
+
+  .image {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+.payBtn {
+  width: 100%;
+  padding: 12px;
+  background-color: #3865b8;
+  color: #fff7f0;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  margin-top: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.payBtn:hover {
+  background-color: #4c1f94;
+  box-shadow: 0 0 20px #ffb84d;
+  transform: scale(1.03);
+}

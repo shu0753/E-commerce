@@ -1,0 +1,186 @@
+
+
+/* Page */
+.dashboardPage {
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(180deg, #fff7e6, #ffe0b2);
+  min-height: 100vh;
+}
+
+/* Hero */
+.heroText {
+  text-align: center;
+  padding-bottom: 10px;
+  background: linear-gradient(90deg, #ff6a00, #ff9800, #ffd700);
+  color: white;
+  position: relative;
+}
+
+/* subtle mandala overlay */
+.heroText::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url("https://www.transparenttextures.com/patterns/arabesque.png");
+  opacity: 0.1;
+  top: 0;
+  left: 0;
+}
+
+/* Glow typing text */
+.glowText {
+  color: #fff;
+  text-shadow: 0 0 5px #ff9800, 0 0 10px #ff6a00, 0 0 20px #ffd700;
+  font-size: 30px;
+}
+
+/* Cursor animation */
+.glowText::after {
+  content: "|";
+  margin-left: 5px;
+  animation: blink 1s infinite;
+}
+@keyframes blink {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+/* Subtitle */
+.subtitle {
+  font-size: 14px;
+  margin-top: 8px;
+  color: rgb(94, 24, 4);
+  text-align: center;
+}
+/* Slider */
+.slider {
+  position: relative;
+  width: 100%;
+  height: 420px;
+  overflow: hidden;
+  border-bottom: 4px solid #ff6a00;
+}
+.slider img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: opacity 1s ease-in-out;
+  filter: brightness(0.85);
+}
+.slider::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(0,0,0,0.4), transparent);
+  top: 0;
+  left: 0;
+}
+.activeSlide { opacity: 1; z-index: 1; }
+.inactiveSlide { opacity: 0; z-index: 0; }
+
+/* Container */
+.container { max-width: 1200px; margin: auto; padding: 25px; }
+
+/* Title */
+.sectionTitle {
+  text-align: center;
+  font-size: 26px;
+  margin-bottom: 25px;
+  color: #b34700;
+  position: relative;
+}
+.sectionTitle::after {
+  content: "🪔 🪔 🪔";
+  display: block;
+  font-size: 18px;
+  margin-top: 5px;
+}
+
+/* Product Grid */
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 22px;
+}
+
+/* Card */
+.card {
+  background: #fffaf0;
+  border-radius: 12px;
+  padding: 12px;
+  width: 100%;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  transition: 0.3s;
+  border: 1px solid #ffe0b2;
+  position: relative;
+}
+.card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 0 20px rgba(255,140,0,0.4);
+}
+
+/* Image */
+.cardImage { height: 170px; overflow: hidden; border-radius: 10px; position: relative; }
+.cardImage img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Badge */
+.badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: linear-gradient(90deg, #ff6a00, #ff9800);
+  color: white;
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  box-shadow: 0 0 8px rgba(255,140,0,0.7);
+}
+
+/* Content */
+.cardContent h3 { font-size: 16px; margin: 10px 0; color: #4e2600; }
+.price { color: #d35400; font-weight: bold; font-size: 15px; }
+
+/* Buttons */
+.cardActions { display: flex; gap: 10px; margin-top: 12px; }
+
+.viewBtn {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ff6a00;
+  background: white;
+  color: #ff6a00;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+.viewBtn:hover { background: #ff6a00; color: white; }
+
+.cartBtn {
+  flex: 1;
+  padding: 2px;
+  border: none;
+  background: linear-gradient(90deg, #ff6a00, #ff9800);
+  color: white;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.cartBtn::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255,0.2);
+  top: 0;
+  left: -100%;
+  transition: 0.4s;
+}
+.cartBtn:hover::after { left: 100%; }
+.cartBtn:hover { background: linear-gradient(90deg, #e65c00, #ff8000); }

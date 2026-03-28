@@ -1,61 +1,147 @@
-.container{
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    background-image: url("../../assets/login.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-image: url('https://i.pinimg.com/736x/c0/9f/29/c09f299b1b54ccbbabab7f6d2412fc71.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
 }
 
-.form{
-    background: rgba(255,255,255,0.95);
-    padding:35px;
-    width:320px;
-    border-radius:10px;
-    display:flex;
-    flex-direction:column;
-    gap:12px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.4);
+/* Floating diyas / emojis for theme */
+.container::before {
+  content: '🪔🌸🕉️';
+  position: absolute;
+  top: -40px;
+  left: 10%;
+  font-size: 3rem;
+  animation: float 12s infinite linear;
+  opacity: 0.15;
 }
 
-.title{
-    text-align:center;
-    margin-bottom:10px;
-    color:#333;
+.container::after {
+  content: '🌺🪔🌸';
+  position: absolute;
+  top: -50px;
+  left: 70%;
+  font-size: 2.5rem;
+  animation: float 14s infinite linear;
+  opacity: 0.12;
 }
 
-label{
-    font-size:14px;
-    color:#333;
+@keyframes float {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(25px) rotate(15deg); }
+  100% { transform: translateY(0) rotate(0deg); }
 }
 
-input{
-    padding:10px;
-    border:1px solid #ccc;
-    border-radius:5px;
-    outline:none;
-    font-size:14px;
+/* Form */
+.form {
+  background: rgba(255, 248, 235, 0.95); /* soft ritual color */
+  padding: 40px 30px;
+  border-radius: 25px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 15px 30px rgba(184, 92, 56, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-input:focus{
-    border-color:orange;
+.form:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 25px 40px rgba(184, 92, 56, 0.3);
 }
 
-button{
-    margin-top:10px;
-    padding:10px;
-    border:none;
-    border-radius:5px;
-    background:orange;
-    color:white;
-    font-size:16px;
-    cursor:pointer;
-    transition:0.3s;
+/* Title */
+.title {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 30px;
+  color: #b85c38; /* warm brown-orange */
+  font-weight: bold;
+  text-shadow: 0 0 5px #ffd27f, 0 0 10px #ffb84d;
+  animation: glow 2s infinite alternate;
 }
 
-button:hover{
-    background:darkorange;
+/* Glow Animation */
+@keyframes glow {
+  0% { text-shadow: 0 0 5px #ffd6a5, 0 0 10px #ffb84d; }
+  50% { text-shadow: 0 0 10px #ffbb66, 0 0 20px #ff9933; }
+  100% { text-shadow: 0 0 5px #ffd6a5, 0 0 10px #ffb84d; }
+}
+
+/* Labels */
+label {
+  font-size: 14px;
+  color: #6a3f2a;
+  margin-bottom: 5px;
+  display: block;
+  margin-top: 15px;
+}
+
+/* Inputs */
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 12px;
+  border: 1px solid #d9a066;
+  font-size: 16px;
+  outline: none;
+  transition: all 0.3s ease;
+  background: #fff7f0;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+  border-color: #ff8c42;
+  box-shadow: 0 0 8px rgba(255, 140, 66, 0.2);
+}
+
+/* Button */
+button[type="submit"] {
+  margin-top: 25px;
+  padding: 12px 0;
+  width: 100%;
+  background: #ff6a00;
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background: #e65c00;
+  transform: scale(1.05);
+}
+
+button[disabled] {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  .form {
+    padding: 30px 20px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  input[type="email"],
+  input[type="password"] {
+    font-size: 14px;
+  }
+
+  button[type="submit"] {
+    font-size: 14px;
+  }
 }

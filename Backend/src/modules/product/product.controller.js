@@ -1,5 +1,6 @@
 import Product from "../../models/product.model.js";
 import cloudinary from "../../config/cloudinary.js";
+import { createProductService } from "./product.services.js"; 
 
 const streamUpload=(req)=>{
   return new Promise((resolve,reject)=>{
@@ -29,6 +30,10 @@ export const createProduct = async (req, res) => {
   const result = await streamUpload(req);
   console.log(result);
 
+  const productInfo= await createProductService({
+    ...req.body,
+    image:result.secure_url
+  });
 
     if(result){
       res.status(201).json({

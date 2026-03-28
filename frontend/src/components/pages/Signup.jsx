@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import styles from './signup.module.css';
+import React, { useState } from "react";
+import styles from "./signup.module.css";
 
-function Signup({ setMode }) {
+function Signup({ setActiveTab }) { // ✅ Receive setActiveTab from Auth
 
   const [signupData, setSignupData] = useState({
     email: "",
@@ -12,19 +12,17 @@ function Signup({ setMode }) {
     confirmPassword: ""
   });
 
+  // Handle input changes
   function handleOnchange(e) {
     const { name, value } = e.target;
-
-    setSignupData((prev) => ({
-      ...prev,
-      [name]: value
-    }));
+    setSignupData(prev => ({ ...prev, [name]: value }));
   }
 
+  // Submit Registration
   async function submitRegister(e) {
     e.preventDefault();
 
-    // ✅ validation
+    // Validation
     if (
       !signupData.email ||
       !signupData.firstname ||
@@ -45,14 +43,12 @@ function Signup({ setMode }) {
     try {
       const res = await fetch("http://localhost:5000/api/signup", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email: signupData.email,
-          firstName: signupData.firstname,  // ✅ match backend
-          lastName: signupData.lastname,    // ✅ match backend
-          phoneNO: signupData.phone,        // ✅ match backend
+          firstName: signupData.firstname,
+          lastName: signupData.lastname,
+          phoneNO: signupData.phone,
           password: signupData.password,
           confirmPassword: signupData.confirmPassword
         })
@@ -64,7 +60,7 @@ function Signup({ setMode }) {
       if (data.success) {
         alert("Registration Successful ✅");
 
-        // reset form
+        // Reset form
         setSignupData({
           email: "",
           firstname: "",
@@ -74,9 +70,9 @@ function Signup({ setMode }) {
           confirmPassword: ""
         });
 
-        if (setMode) {
-          setMode("signin");
-        }
+        // ✅ Switch to login tab
+        if (setActiveTab) setActiveTab("login");
+
       } else {
         alert(data.message || "Registration Failed");
       }
@@ -88,69 +84,67 @@ function Signup({ setMode }) {
   }
 
   return (
-    <div className={styles.container}>
-      <form className={styles.form} onSubmit={submitRegister}>
-        <h1 className={styles.title}>Signup</h1>
+    <form className={styles.form} onSubmit={submitRegister}>
+      <h1 className={styles.title}>Signup</h1>
 
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={signupData.email}
-          onChange={handleOnchange}
-          required
-        />
+      <input
+        type="email"
+        name="email"
+        placeholder="Email"
+        value={signupData.email}
+        onChange={handleOnchange}
+        required
+      />
 
-        <div className={styles.row}>
-          <input
-            type="text"
-            name="firstname"
-            placeholder="First Name"
-            value={signupData.firstname}
-            onChange={handleOnchange}
-            required
-          />
-          <input
-            type="text"
-            name="lastname"
-            placeholder="Last Name"
-            value={signupData.lastname}
-            onChange={handleOnchange}
-            required
-          />
-        </div>
-
+      <div className={styles.row}>
         <input
           type="text"
-          name="phone"
-          placeholder="Phone Number"
-          value={signupData.phone}
+          name="firstname"
+          placeholder="First Name"
+          value={signupData.firstname}
           onChange={handleOnchange}
           required
         />
+        <input
+          type="text"
+          name="lastname"
+          placeholder="Last Name"
+          value={signupData.lastname}
+          onChange={handleOnchange}
+          required
+        />
+      </div>
 
-        <div className={styles.row}>
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={signupData.password}
-            onChange={handleOnchange}
-            required
-          />
-          <input
-            type="password"
-            name="confirmPassword"
-            placeholder="Confirm Password"
-            value={signupData.confirmPassword}
-            onChange={handleOnchange}
-            required
-          />
-        </div>
+      <input
+        type="text"
+        name="phone"
+        placeholder="Phone Number"
+        value={signupData.phone}
+        onChange={handleOnchange}
+        required
+      />
 
-        <button type="submit">Signup</button>
-      </form>
-    </div>
+      <div className={styles.row}>
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={signupData.password}
+          onChange={handleOnchange}
+          required
+        />
+        <input
+          type="password"
+          name="confirmPassword"
+          placeholder="Confirm Password"
+          value={signupData.confirmPassword}
+          onChange={handleOnchange}
+          required
+        />
+      </div>
+
+      <button type="submit">Signup</button>
+    </form>
   );
 }
 
